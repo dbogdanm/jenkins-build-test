@@ -23,7 +23,7 @@ pipeline
         {
             steps
             {
-                sh 'docker build -t 100.119.85.118:8082/java_app:1.3 .'
+                sh 'docker build -t 100.119.85.118:8082/java_app:$BUILD_NUMBER .'
             }
         }
         stage("push")
@@ -32,7 +32,7 @@ pipeline
             {
                 sh  '''
                       echo $NEXUS_PSW | docker login -u $NEXUS_USR --password-stdin 100.119.85.118:8082
-                      docker push 100.119.85.118:8082/java_app:1.3
+                      docker push 100.119.85.118:8082/java_app:$BUILD_NUMBER
                     '''
             }
         }
