@@ -19,7 +19,7 @@ pipeline
         {
             steps
             {
-                sh 'docker build -t 100.119.85.118:8082java_app:1.3 .'
+                sh 'docker build -t 100.119.85.118:8082/java_app:1.3 .'
             }
         }
         stage("push")
