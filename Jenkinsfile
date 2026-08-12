@@ -6,6 +6,10 @@ pipeline
     {
         maven 'maven-3.9'
     }
+    environment {
+    NEXUS = credentials('nexus')
+    }
+
     stages
     {
         stage("build")
@@ -26,7 +30,10 @@ pipeline
         {
             steps
             {
-                echo "evident ca nu merge"
+                sh  '''
+                      echo $NEXUS_PSW | docker login -u $NEXUS_USR --password-stdin 100.119.85.118:8082
+                      docker push 100.119.85.118:8082/java_app:1.3
+                    '''
             }
         }
     }
