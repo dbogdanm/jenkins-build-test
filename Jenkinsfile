@@ -61,7 +61,8 @@ pipeline
         {
             steps
             {
-                sh "docker login --username $NEXUS_CREDS_USR -p $NEXUS_CREDS_PSW $ADRESA_IP_NEXUS:$PORT_NEXUS"
+                sh 'echo -n "$ADRESA_IP_NEXUS" | wc -c; echo -n "$PORT_NEXUS" | wc -c'
+                sh 'echo "$NEXUS_CREDS_PSW" | docker login -u "$NEXUS_CREDS_USR" --password-stdin $ADRESA_IP_NEXUS:$PORT_NEXUS'
                 sh "docker push $ADRESA_IP_NEXUS:$PORT_NEXUS/java_app:$BUILD_NUMBER"
                 sh 'docker rmi $(docker images --filter=reference="$ADRESA_IP_NEXUS:$PORT_NEXUS/java_app*" -q)'
                 sh "docker logout $ADRESA_IP_NEXUS:$PORT_NEXUS"
