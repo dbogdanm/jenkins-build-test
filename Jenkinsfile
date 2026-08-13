@@ -51,7 +51,7 @@ pipeline
         stage('build')
         {
             steps
-            {
+            {   sh 'echo -n "$ADRESA_IP_NEXUS" | wc -c; echo -n "$PORT_NEXUS" | wc -c'
                 sh "docker build -t $ADRESA_IP_NEXUS:$PORT_NEXUS/java_app:$BUILD_NUMBER . "
             }
         }
