@@ -88,25 +88,15 @@ pipeline
         }
 
 
-}
-        post
+    }
+
+    post
+    {
+        always
         {
-            success
-            {
-                echo 'delogare si cleanup'
-                sh 'docker rmi $ADRESA_IP_NEXUS:$PORT_NEXUS/java_app:$BUILD_NUMBER'
-
-            }
-
-            always
-            {
                 sh 'docker logout $ADRESA_IP_NEXUS:$PORT_NEXUS'
-            }
         }
 
-
-
-
-
+    }
 
 }
