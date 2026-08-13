@@ -50,6 +50,11 @@ pipeline
 
         stage('build')
         {
+            when
+            {
+                branch 'master'
+            }
+
             steps
             {
                 sh 'docker build -t $ADRESA_IP_NEXUS:$PORT_NEXUS/java_app:$BUILD_NUMBER . '
@@ -59,6 +64,11 @@ pipeline
 
         stage('login_si_push')
         {
+            when
+            {
+                branch 'master'
+            }
+
             steps
             {
                 sh 'echo "$NEXUS_CREDS_PSW" | docker login -u "$NEXUS_CREDS_USR" --password-stdin $ADRESA_IP_NEXUS:$PORT_NEXUS'
