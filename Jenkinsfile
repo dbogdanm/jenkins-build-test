@@ -3,6 +3,9 @@
 //2. din artifact sa faca dockerimage (prin build)
 //3. acel dockerimage sa fie pushat pe nexus
 
+def gv
+
+
 pipeline
 {
     agent any
@@ -27,6 +30,17 @@ pipeline
 
     stages
     {
+
+        stage('init')
+        {
+            steps
+            {
+                script
+                {
+                    gv = load 'script.groovy'
+                }
+            }
+        }
 
         stage('test_maven')
         {
@@ -81,17 +95,20 @@ pipeline
 
             steps
             {
-                sh 'echo "$NEXUS_CREDS_PSW" | docker login -u "$NEXUS_CREDS_USR" --password-stdin $ADRESA_IP_NEXUS:$PORT_NEXUS'
-                sh 'docker push $ADRESA_IP_NEXUS:$PORT_NEXUS/java_app:$BUILD_NUMBER'
+                script
+                {
+                    gv.loginPush() //apel invelit in script
+                }
             }
 
             post
             {
                 success
                 {
-                    echo 'delogare si cleanup'
-                    sh 'docker rmi $ADRESA_IP_NEXUS:$PORT_NEXUS/java_app:$BUILD_NUMBER'
-
+                    script
+                    {
+                        gv.cleanupSignoff() //la fel si aici
+                    }
                 }
             }
 
