@@ -7,6 +7,11 @@ pipeline
 {
     agent any
 
+    parameters
+    {
+        booleanParam(name: 'PUSH', defaultValue: true, description: '1 = push, 0 = nu' )
+    }
+
     environment
     {
         ADRESA_IP_NEXUS = credentials('ADRESA_NEXUS')
@@ -66,7 +71,12 @@ pipeline
         {
             when
             {
-                branch 'master'
+                allOf
+                {
+                    branch 'master'  //verificare jenkins, evaluata de jenkins, deci stie direct ce sa ii faca
+                    expression { params.PUSH == true } //ce e in acolade e groovy, de aia se pune expression ca sa aiba cum jenkins sa evalueeze
+                }
+
             }
 
             steps
