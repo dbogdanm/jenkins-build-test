@@ -76,6 +76,18 @@ pipeline
         }
 
 
+        stage('pushCheck')
+        {
+            input
+            {
+                message "dai push in nexus la aceasta imagine?"
+                ok "Da"
+                cancel "Nu"
+
+            }
+        }
+
+
         stage('login_si_push')
         {
             when
