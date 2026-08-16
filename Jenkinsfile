@@ -87,6 +87,9 @@ pipeline
             when
             {
                 branch 'master'
+                beforeInput true  //asta forteaza conditionala when sa se evalueze inaintea lui input
+                                  // am avut cazul in care eram pe feature, si chiar daca pui da in console ouput ca vrei sa dai push
+                                  //o sa iti zica skipped due to when conditional, deci dai skip la o decizie care nu conteaza practic
             }
 
             input
