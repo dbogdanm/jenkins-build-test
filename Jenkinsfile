@@ -81,6 +81,27 @@ pipeline
         }
 
 
+        stage('nexusPushCheck')
+        {
+
+            when
+            {
+                branch 'master'
+            }
+
+            input
+            {
+                message "dai push la imagine in nexus? nebifat e nu"
+                ok "da"
+            }
+
+            steps
+            {
+                echo "aprobat, continuam"
+            }
+        }
+
+
         stage('login_si_push')
         {
             when
