@@ -81,14 +81,23 @@ pipeline
         }
 
 
-        stage('pushCheck')
+        stage('nexusPushCheck')
         {
+
+            when
+            {
+                branch 'master'
+            }
+
             input
             {
-                message "dai push in nexus la aceasta imagine?"
-                ok "Da"
-                cancel "Nu"
+                message "dai push la imagine in nexus? nebifat e nu"
+                ok "da"
+            }
 
+            steps
+            {
+                echo "aprobat, continuam"
             }
         }
 
