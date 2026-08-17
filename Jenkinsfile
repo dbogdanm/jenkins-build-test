@@ -2,7 +2,6 @@
 //1. sa faca din cod artifact(prin maven 3.9)
 //2. din artifact sa faca dockerimage (prin build)
 //3. acel dockerimage sa fie pushat pe nexus
-//
 
 def gv
 
